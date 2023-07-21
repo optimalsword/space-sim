@@ -1,10 +1,14 @@
-cmake_minimum_required(VERSION 3.23)
-project(space_sim C)
+cmake_minimum_required(VERSION 3.17)
+project(space_sim)
 
-set(CMAKE_C_STANDARD 99)
-
-find_package(SDL2 REQUIRED)
-include_directories(${SDL_INCLUDE_DIRS})
+set(CMAKE_CXX_STANDARD 99)
 
 add_executable(space_sim main.c)
-target_link_libraries(space_sim ${SDL2_LIBRARIES})
+
+# --- SDL2 SETUP ---
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
+set(SDL2_PATH "SDL2/x86_64-w64-mingw32")
+
+find_package(SDL2 REQUIRED)
+include_directories(${SDL2_INCLUDE_DIR})
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY})

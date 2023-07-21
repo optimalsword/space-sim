@@ -5,10 +5,15 @@
 #define HEIGHT 720
 
 
-int main() {
+int main(int argc, char** argv) {
     SDL_Init(SDL_INIT_VIDEO);
 
-    SDL_Window* screen = SDL_CreateWindow("Space is cool", 0, 0, WIDTH, HEIGHT, 0);
+
+    for (int i = 0; i < SDL_GetNumVideoDrivers(); ++i) {
+        printf("Driver %d: %s", i, SDL_GetVideoDriver(i));
+    }
+
+    SDL_Window* screen = SDL_CreateWindow("Space is cool", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
     if (!screen) {
         puts("screen creation went wrong\n");
         puts(SDL_GetError());
@@ -23,7 +28,7 @@ int main() {
         puts("Something went wrong updating the window");
         puts(SDL_GetError());
     }
-    //puts("test\n");
+    puts("test\n");
 
     SDL_Event event;
     int quit = 0;
